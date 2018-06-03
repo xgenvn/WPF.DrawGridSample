@@ -4,9 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Canvas.GridDraw"
+        xmlns:wpfAutoGrid="clr-namespace:WpfAutoGrid;assembly=WpfAutoGrid"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="480" Width="640">
+    <!--320 + 240-->
+    <Border Background="DimGray" Name="SampleTileGridOutlineContainer">
+        <Viewbox Stretch="Uniform">
+            <Grid
+                Name="MainCanvas"
+                Width="400"
+                Height="400"
+                SizeChanged="MainCanvas_OnSizeChanged"
+                MouseDown="MainCanvas_OnMouseDown"
+                MouseUp="MainCanvas_OnMouseUp"
+                MouseRightButtonDown="MainCanvas_OnMouseRightButtonDown"
+                MouseRightButtonUp="MainCanvas_OnMouseRightButtonUp"
+                MouseLeftButtonDown="MainCanvas_OnMouseLeftButtonDown"
+                MouseLeftButtonUp="MainCanvas_OnMouseLeftButtonUp">
+                <Border Name="SampleHolderOutlineContainer">
+                    <Ellipse Name="SampleHolderOutline" Fill="#666666" Width="Auto" Height="Auto" Stroke="#444444"
+                             StrokeThickness="8" />
+                </Border>
+
+                <Border Padding="40" Name="SampleHolderContainer">
+                    <Ellipse Name="SampleHolder" Fill="#eeeeee" Width="Auto" Height="Auto" Stroke="#888888"
+                             StrokeThickness="10" />
+                </Border>
+                <Border Background="DarkSlateGray" Name="SampleTileGridContainer">
+                    <Grid Name="SampleTileGrid" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400" Height="400">
+                 <!--       <Border BorderThickness="1" BorderBrush="White" Width="40" Height="40" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <Rectangle Fill="Transparent" StrokeThickness="0"></Rectangle>
+                        </Border>
+                        <Border BorderThickness="1" BorderBrush="White" Width="40" Height="40" Margin="40,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <Rectangle Fill="Transparent" StrokeThickness="0"></Rectangle>
+                        </Border>-->
+                    </Grid>
+                </Border>
+            </Grid>
+        </Viewbox>
+    </Border>
+
 </Window>
