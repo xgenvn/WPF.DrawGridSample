@@ -112,10 +112,10 @@ namespace Canvas.GridDraw
                 var columnIndex= tileIndex % numberOfTile;
                 Debug.WriteLine($"{rowIndex}, {columnIndex}");
 
-                var tileContainer = new Border()
+                var tileContainer = new Viewbox()
                 {
-                    BorderThickness = new Thickness(0),
-                    BorderBrush = Brushes.Transparent,
+                    //BorderThickness = new Thickness(0),
+                    //BorderBrush = Brushes.Transparent,
                     Width = 40,
                     Height = 40,
                     VerticalAlignment = VerticalAlignment.Top,
@@ -123,18 +123,19 @@ namespace Canvas.GridDraw
                     Margin = new Thickness(40 * rowIndex, 40 * columnIndex, 0, 0),
                 };
 
+
                 var tile = new Rectangle
                 {
                     Fill = Brushes.Transparent,
                     Stroke = Brushes.White,
                     StrokeThickness = 1,
-                    Margin = new Thickness(-1,-1,0,0),
-                    Width = 41,
-                    Height = 41,
+                    Margin = new Thickness(-1, -1, 0, 0),
+                    Width = 40,
+                    Height = 40,
                 };
 
-                tile.MouseEnter += OnMouseEnterTile;
-                tile.MouseLeave += OnMouseLeaveTile;
+                tileContainer.MouseEnter += OnMouseEnterTile;
+                tileContainer.MouseLeave += OnMouseLeaveTile;
 
                 tileContainer.Child = tile;
 
@@ -144,12 +145,34 @@ namespace Canvas.GridDraw
 
         private void OnMouseLeaveTile(object sender, MouseEventArgs e)
         {
-            if (sender is Rectangle tile) tile.Fill = Brushes.Transparent;
+            if (sender is Viewbox tileContainer)
+            {
+                tileContainer.Width = 40;
+                tileContainer.Height = 40;
+
+                var tile = tileContainer.Child as Rectangle;
+                tile.Fill = Brushes.Transparent;
+                tile.Stroke = Brushes.White;
+                tile.StrokeThickness = 1;
+                Panel.SetZIndex(tileContainer, 0);
+            }
         }
 
         private static void OnMouseEnterTile(object sender, MouseEventArgs e)
         {
-            if (sender is Rectangle tile) tile.Fill = !Equals(tile.Fill, Brushes.Aqua) ? Brushes.Aqua : Brushes.Transparent;
+            if (sender is Viewbox tileContainer)
+            {
+
+                tileContainer.Width = 40;
+                tileContainer.Height = 40;
+
+                var tile = tileContainer.Child as Rectangle;
+                tile.Fill = Brushes.Orange;
+                tile.Stroke = Brushes.OrangeRed;
+                tile.StrokeThickness = 2;
+
+                Panel.SetZIndex(tileContainer, 200);
+            }
         }
 
         public Brush GetRandomColor()
